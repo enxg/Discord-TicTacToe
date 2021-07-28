@@ -1,0 +1,27 @@
+{
+  "name": "discord-tictactoe",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "repository": "https://github.com/RedS-DEV/Discord-TicTacToe",
+  "author": "RedS-DEV <Enes Genç>",
+  "license": "GNU GPLv3",
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^16.4.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@sapphire/framework": "^1.0.2",
+    "discord.js": "^13.0.0-dev.5e433b5.1627473836"
+  },
+  "script": {
+    "lint": "eslint --ext .ts src/",
+    "compile": "tsc",
+    "start": "node dist/main.js"
+  }
+}
