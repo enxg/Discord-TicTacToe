@@ -29,6 +29,10 @@
   "scripts": {
     "lint": "eslint --ext .ts src/",
     "compile": "tsc",
-    "start": "node dist/main.js"
+    "exec": "node --experimental-json-modules dist/main.js",
+    "start": "yarn run compile && yarn run exec"
+  },
+  "engines": {
+    "node": ">=16.6.0"
   }
 }
