@@ -118,3 +118,7 @@ dist
 
 # IDEA
 .idea/
+
+# Firebase service key
+key.json
+key.txt
