@@ -19,6 +19,8 @@
 import { Command, PieceContext } from "@sapphire/framework";
 import { Message, MessageEmbed } from "discord.js";
 
+import emojis from "../config/emojis.json";
+
 class command extends Command {
   constructor(context: PieceContext) {
     super(context, {
@@ -28,7 +30,7 @@ class command extends Command {
   }
 
   async run(msg: Message) {
-    const m = await msg.channel.send({ content: "<a:loading:810925376586252308>" });
+    const m = await msg.channel.send({ content: emojis.loading });
     const ping = m.createdTimestamp - msg.createdTimestamp;
     const embed = new MessageEmbed()
       .setColor(ping < 60 ? "#2a9d8f" : "#e9c46a")
