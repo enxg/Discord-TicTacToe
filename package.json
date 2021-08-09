@@ -4,7 +4,7 @@
   "main": "dist/main.js",
   "repository": "https://github.com/RedS-DEV/Discord-TicTacToe",
   "author": "Enes Genç <RedS-DEV>",
-  "license": "GNU GPLv3",
+  "license": "GNU AGPLv3",
   "private": true,
   "type": "module",
   "devDependencies": {
