@@ -6,6 +6,7 @@
   "author": "Enes Genç <RedS-DEV>",
   "license": "GNU GPLv3",
   "private": true,
+  "type": "module",
   "devDependencies": {
     "@types/node": "^16.4.5",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
