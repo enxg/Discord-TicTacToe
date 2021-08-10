@@ -16,9 +16,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Event, PieceContext /* Store */ } from "@sapphire/framework";
+import { Listener, PieceContext /* Store */ } from "@sapphire/framework";
 
-class event extends Event {
+class event extends Listener {
   constructor(context: PieceContext) {
     super(context, {
       once: true,
@@ -26,7 +26,7 @@ class event extends Event {
   }
 
   async run() {
-    const { /* client, */ logger } = this.context;
+    const { client, logger } = this.container;
     /*
     const stores = [...client.stores.values()];
 
@@ -34,7 +34,7 @@ class event extends Event {
     for (const store of stores) logger.info(store);
     */
 
-    logger.info(`Logged in as ${this.context.client.user?.tag}`);
+    logger.info(`Logged in as ${client.user?.tag}`);
   }
 }
 

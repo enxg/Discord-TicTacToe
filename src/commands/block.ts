@@ -30,10 +30,10 @@ class command extends SubCommandPluginCommand {
       name: "block",
       description: "Block/unblock a user or see the users you blocked before.",
       subCommands: ["add", "remove", { input: "list", default: true }],
-      strategyOptions: { flags: ["guild"] },
+      flags: ["guild"],
     });
 
-    this.collection = this.context.db.collection("blocks");
+    this.collection = this.container.db.collection("blocks");
   }
 
   async listUser(list: FirebaseFirestore.DocumentData | undefined) {
@@ -42,7 +42,7 @@ class command extends SubCommandPluginCommand {
     // eslint-disable-next-line prefer-destructuring
     const blockedUsers: id[] = list["blockedUsers"];
     return Promise.all(blockedUsers.map(async (u: id) => {
-      const user = await this.context.client.users.fetch(u as `${bigint}`);
+      const user = await this.container.client.users.fetch(u as `${bigint}`);
       return `${user?.tag ?? "Can't fetch the user"} - ${u}`;
     }));
   }
@@ -53,7 +53,7 @@ class command extends SubCommandPluginCommand {
     // eslint-disable-next-line prefer-destructuring
     const blockedGuilds: id[] = list["blockedGuilds"];
     return Promise.all(blockedGuilds.map(async (u: id) => {
-      const guild = await this.context.client.guilds.fetch(u as `${bigint}`);
+      const guild = await this.container.client.guilds.fetch(u as `${bigint}`);
       return `${guild?.name ?? "Can't fetch the guild"} - ${u}`;
     }));
   }
@@ -67,8 +67,8 @@ class command extends SubCommandPluginCommand {
     const blockedUsers = await this.listUser(blocklist);
     const blockedGuilds = await this.listGuild(blocklist);
 
-    this.context.logger.info(blockedUsers);
-    this.context.logger.info(blockedGuilds);
+    this.container.logger.info(blockedUsers);
+    this.container.logger.info(blockedGuilds);
 
     const embed = new MessageEmbed()
       .setTitle("Your blocklist")
@@ -82,7 +82,7 @@ class command extends SubCommandPluginCommand {
   async add(msg: Message, args: Args) {
     if (args.getFlags("guild")) {
       return this.collection.doc(msg.author.id).set({
-        blockedGuilds: this.context.fb.firestore.FieldValue.arrayUnion(msg.guild?.id),
+        blockedGuilds: this.container.fb.firestore.FieldValue.arrayUnion(msg.guild?.id),
       }, { merge: true })
         .then(() => msg.channel.send({ content: `Added guild named ${msg.guild?.name} to your blocklist.` }))
         .catch(() => msg.channel.send({ content: "An error occurred while adding guild to your blocklist, please contact us." }));
@@ -95,7 +95,7 @@ class command extends SubCommandPluginCommand {
     if (user.value.bot) return msg.channel.send({ content: "You can't block a bot." });
 
     return this.collection.doc(msg.author.id).set({
-      blockedUsers: this.context.fb.firestore.FieldValue.arrayUnion(user.value.id),
+      blockedUsers: this.container.fb.firestore.FieldValue.arrayUnion(user.value.id),
     }, { merge: true })
       .then(() => msg.channel.send({ content: `Added \`${user.value.tag}\` to your blocklist.` }))
       .catch(() => msg.channel.send({ content: "An error occurred while adding user to your blocklist, please contact us." }));
@@ -104,7 +104,7 @@ class command extends SubCommandPluginCommand {
   async remove(msg: Message, args: Args) {
     if (args.getFlags("guild")) {
       return this.collection.doc(msg.author.id).set({
-        blockedGuilds: this.context.fb.firestore.FieldValue.arrayRemove(msg.guild?.id),
+        blockedGuilds: this.container.fb.firestore.FieldValue.arrayRemove(msg.guild?.id),
       }, { merge: true })
         .then(() => msg.channel.send({ content: `Removed guild named \`${msg.guild?.name}\` from your blocklist.` }))
         .catch(() => msg.channel.send({ content: "An error occured while removing guild from your blocklist, please contact us." }));
@@ -117,7 +117,7 @@ class command extends SubCommandPluginCommand {
     if (user.value.bot) return msg.channel.send({ content: "You can't block/unblock a bot." });
 
     return this.collection.doc(msg.author.id).set({
-      blockedUsers: this.context.fb.firestore.FieldValue.arrayRemove(user.value.id),
+      blockedUsers: this.container.fb.firestore.FieldValue.arrayRemove(user.value.id),
     }, { merge: true })
       .then(() => msg.channel.send({ content: `Removed \`${user.value.tag}\` from your blocklist.` }))
       .catch(() => msg.channel.send({ content: "An error occurred while removing user from your blocklist, please contact us." }));

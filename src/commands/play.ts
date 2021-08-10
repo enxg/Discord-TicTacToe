@@ -40,7 +40,7 @@ class command extends Command {
       description: "Play Tic-Tac-Toe with your friend or with the AI.",
     });
 
-    this.leaderboard = this.context.db.collection("leaderboard");
+    this.leaderboard = this.container.db.collection("leaderboard");
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -149,8 +149,8 @@ class command extends Command {
     const user = await args.pickResult("user");
 
     if (!user.success) return this.AIgame(msg);
-    if (user.value.bot && user.value !== this.context.client.user) return msg.channel.send("You can't play with the other bots.");
-    if (user.value === this.context.client.user) return this.AIgame(msg);
+    if (user.value.bot && user.value !== this.container.client.user) return msg.channel.send("You can't play with the other bots.");
+    if (user.value === this.container.client.user) return this.AIgame(msg);
     if (msg.author === user.value) return msg.channel.send("You can't play with yourself, dummy.");
 
     const row = new MessageActionRow()

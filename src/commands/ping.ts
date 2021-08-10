@@ -34,8 +34,8 @@ class command extends Command {
     const ping = m.createdTimestamp - msg.createdTimestamp;
     const embed = new MessageEmbed()
       .setColor(ping < 60 ? "#2a9d8f" : "#e9c46a")
-      .setTitle("🏓 Pong!")
-      .setDescription(`Message Ping: ${ping} \n WebSocket Ping: ${this.context.client.ws.ping}`)
+      .setTitle(t("common:asd", { emoji: "🏓" }))
+      .setDescription(`Message Ping: ${ping} \n WebSocket Ping: ${this.container.client.ws.ping}`)
       .setTimestamp();
 
     await m.edit({ embeds: [embed], content: null });

@@ -18,9 +18,8 @@
 
 import dotenv from "dotenv";
 import firebase from "firebase-admin";
-import "@sapphire/pieces";
 import "@sapphire/plugin-i18next/register";
-import { SapphireClient, Store } from "@sapphire/framework";
+import { SapphireClient, container } from "@sapphire/framework";
 
 type Opaque<T, K extends string> = T & { __typename: K }
 type Base64 = Opaque<string, "base64">
@@ -48,11 +47,11 @@ const client = new SapphireClient({
   allowedMentions: {},
 });
 
-Store.injectedContext.db = firebase.firestore();
-Store.injectedContext.fb = firebase;
+container.db = firestore;
+container.fb = firebase;
 
 declare module "@sapphire/pieces" {
-  interface PieceContextExtras {
+  interface Container {
     db: FirebaseFirestore.Firestore,
     fb: typeof firebase,
   }
