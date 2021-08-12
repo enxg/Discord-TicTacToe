@@ -69,9 +69,6 @@ class command extends SubCommandPluginCommand {
     const blockedUsers = await this.listUser(blocklist, t);
     const blockedGuilds = await this.listGuild(blocklist, t);
 
-    this.container.logger.info(blockedUsers);
-    this.container.logger.info(blockedGuilds);
-
     const embed = new MessageEmbed()
       .setTitle(t("block:your_blocklist"))
       .addField(t("block:blocked.users"), blockedUsers.join("\n"))
