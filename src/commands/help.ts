@@ -17,7 +17,7 @@
  */
 
 import { Args, Command, PieceContext } from "@sapphire/framework";
-import { ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { ColorResolvable, Message, MessageEmbed, Permissions } from "discord.js";
 import { TFunction } from "@sapphire/plugin-i18next";
 
 import colors from "#config/colors.json";
@@ -29,10 +29,15 @@ export interface usagesD {
 
 const usages = usagesJson as usagesD;
 
+const perms = new Permissions([
+  Permissions.FLAGS.EMBED_LINKS,
+]);
+
 class command extends Command {
   constructor(context: PieceContext) {
     super(context, {
       name: "help",
+      preconditions: [{ name: "Permissions", context: { permissions: perms } }],
     });
   }
 

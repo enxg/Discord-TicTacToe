@@ -20,7 +20,7 @@
 
 import { Args, PieceContext } from "@sapphire/framework";
 import { SubCommandPluginCommand } from "@sapphire/plugin-subcommands";
-import { ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { ColorResolvable, Message, MessageEmbed, Permissions } from "discord.js";
 import emojiJson from "#config/emojis.json";
 import colors from "#config/colors.json";
 
@@ -33,6 +33,9 @@ interface emojiD {
 }
 
 const emojis = emojiJson as emojiD;
+const perms = new Permissions([
+  Permissions.FLAGS.EMBED_LINKS,
+]);
 
 class command extends SubCommandPluginCommand {
   private collection: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>;
@@ -42,6 +45,7 @@ class command extends SubCommandPluginCommand {
       name: "language",
       detailedDescription: "",
       subCommands: [{ input: "help", default: true }, "set", "show"],
+      preconditions: [{ name: "Permissions", context: { permissions: perms } }],
     });
 
     this.collection = this.container.db.collection("languages");

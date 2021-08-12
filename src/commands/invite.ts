@@ -17,15 +17,20 @@
  */
 
 import { Command, PieceContext } from "@sapphire/framework";
-import { ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { ColorResolvable, Message, MessageEmbed, Permissions } from "discord.js";
 
 import colors from "#config/colors.json";
 import invites from "#config/invites.json";
+
+const perms = new Permissions([
+  Permissions.FLAGS.EMBED_LINKS,
+]);
 
 class command extends Command {
   constructor(context: PieceContext) {
     super(context, {
       name: "invite",
+      preconditions: [{ name: "Permissions", context: { permissions: perms } }],
     });
   }
 

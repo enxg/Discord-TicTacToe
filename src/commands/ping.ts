@@ -17,15 +17,19 @@
  */
 
 import { Command, PieceContext } from "@sapphire/framework";
-import { Message, MessageEmbed } from "discord.js";
+import { Message, MessageEmbed, Permissions } from "discord.js";
 
 import emojis from "../config/emojis.json";
+
+const perms = new Permissions([
+  Permissions.FLAGS.EMBED_LINKS,
+]);
 
 class command extends Command {
   constructor(context: PieceContext) {
     super(context, {
       name: "ping",
-      description: "Pings me.",
+      preconditions: [{ name: "Permissions", context: { permissions: perms } }],
     });
   }
 

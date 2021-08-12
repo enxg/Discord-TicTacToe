@@ -18,11 +18,15 @@
 
 import { PieceContext, Args } from "@sapphire/framework";
 import { SubCommandPluginCommand } from "@sapphire/plugin-subcommands";
-import { ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { ColorResolvable, Message, MessageEmbed, Permissions } from "discord.js";
 import { TFunction } from "@sapphire/plugin-i18next";
 import colors from "#config/colors.json";
 
 type id = string | `${bigint}`;
+
+const perms = new Permissions([
+  Permissions.FLAGS.EMBED_LINKS,
+]);
 
 class command extends SubCommandPluginCommand {
   private collection: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>;
@@ -32,6 +36,7 @@ class command extends SubCommandPluginCommand {
       name: "block",
       subCommands: ["add", "remove", { input: "list", default: true }],
       flags: ["guild"],
+      preconditions: [{ name: "Permissions", context: { permissions: perms } }],
     });
 
     this.collection = this.container.db.collection("blocks");
