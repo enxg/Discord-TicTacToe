@@ -31,5 +31,7 @@ module.exports = {
     "arrow-parens": [2, "as-needed"],
     "no-plusplus": 0,
     "no-nested-ternary": 0,
+    "import/no-unresolved": 0,
+    "keyword-spacing": 0,
   },
 };
