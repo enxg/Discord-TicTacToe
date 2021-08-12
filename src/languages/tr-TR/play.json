@@ -2,7 +2,8 @@
   "uGame": {
     "turn": "Sıra: {{user}}. Hamle yapmak için 30 saniyen var.",
     "win": "{{user}} kazandı!",
-    "dmm": "{{user}}, 30 saniye içinde hamle yapmadı."
+    "dmm": "{{user}}, 30 saniye içinde hamle yapmadı.",
+    "tie": "Berabere!"
   },
   "error": {
     "bot": "Diğer botlarla oynayamazsın.",
