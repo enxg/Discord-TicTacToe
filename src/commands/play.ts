@@ -30,9 +30,14 @@ import {
 import emojis from "#config/emojis.json";
 
 type square = "X" | "O" | null;
+interface blocklist {
+  blockedUsers: string[],
+  blockedGuilds: string[],
+}
 
 class command extends Command {
   private leaderboard: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>;
+  private blocks: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>;
 
   constructor(context: PieceContext) {
     super(context, {
@@ -40,6 +45,7 @@ class command extends Command {
     });
 
     this.leaderboard = this.container.db.collection("leaderboard");
+    this.blocks = this.container.db.collection("blocks");
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -160,6 +166,14 @@ class command extends Command {
       if (user.value.bot && user.value !== this.container.client.user) return msg.channel.send(t("play:error.bot"));
       if (user.value === this.container.client.user) return this.AIgame(msg);
       if (msg.author === user.value) return msg.channel.send(t("play:error.self"));
+
+      const blocklistA = (await this.blocks.doc(user.value.id).get()).data() as blocklist;
+      const blocklistB = (await this.blocks.doc(msg.author.id).get()).data() as blocklist;
+
+      if (blocklistA?.blockedUsers?.length > 0 && blocklistA.blockedUsers?.includes(msg.author.id)) return msg.channel.send(t("play:blocked.u1"));
+      if (blocklistA?.blockedGuilds?.length > 0 && blocklistA.blockedGuilds?.includes(msg.guild?.id as string)) return msg.channel.send(t("play:blocked.g1"));
+      if (blocklistB?.blockedUsers?.length > 0 && blocklistB.blockedUsers?.includes(user.value.id)) return msg.channel.send(t("play:blocked.u2"));
+      if (blocklistB?.blockedGuilds?.length > 0 && blocklistB.blockedGuilds?.includes(msg.guild?.id as string)) return msg.channel.send(t("play:blocked.g2"));
 
       const row = new MessageActionRow()
         .addComponents([

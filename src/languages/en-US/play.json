@@ -13,5 +13,11 @@
     "decline": "Decline",
     "invited": "Invited {{user}}. They have one minute to accept.",
     "declined": "{{user}} declined the game invite."
+  },
+  "blocked": {
+    "u1": "This user blocked you.",
+    "g1": "This user blocked this guild.",
+    "u2": "You blocked this user.",
+    "g2": "You blocked this guild."
   }
 }
