@@ -1,0 +1,42 @@
+{
+  "errors": {
+    "didnt_block": "Daha önce hiç bir kullanıcıyı/sunucuyu engellememişsiniz.",
+    "didnt_block_user": "Daha önce hiç bir kullanıcıyı engellememişsiniz.",
+    "didnt_block_guild": "Daha önce hiç bir sunucuyu engellememişsiniz.",
+    "add": {
+      "guild": "Bu sunucuyu engellenenler listenize eklerken bir sorun oluştu, lütfen bize ulaşın.",
+      "user": {
+        "none": "Kullanıcı belirtilmemiş.",
+        "self": "Kendini engelleyemezsin, şapşal.",
+        "bot": "Bir botu engelleyemezsin.",
+        "cantadd": "Bu kullanıcıyı engellenenler listenize eklerken bir sorun oluştu, lütfen bize ulaşın."
+      }
+    },
+    "remove": {
+      "guild": "Bu sunucuyu engellenenler listenizden kaldırırken bir sorun oluştu, lütfen bize ulaşın.",
+      "user": {
+        "none": "Kullanıcı belirtilmemiş.",
+        "self": "Kendini engelleyemez/engeli kaldıramazsın, şapşal.",
+        "bot": "Bir botu engelleyemez/engelini kaldıramazsın.",
+        "cantremove": "Bu kullanıcıyı engellenenler listenizden kaldırırken bir sorun oluştu, lütfen bize ulaşın."
+      }
+    },
+    "cant_fetch": {
+      "user": "Kullanıcı verisi çekilemedi.",
+      "guild": "Sunucu verisi çekilemedi."
+    }
+  },
+  "your_blocklist": "Engellenenler listeniz",
+  "blocked": {
+    "users": "Engellenmiş Kullanıcılar",
+    "guilds": "Engellenmiş Sunucular"
+  },
+  "add": {
+    "guild": "{{guildName}} adlı sunucu engellenenler listenize eklendi.",
+    "user": "{{userName}} adlı kullanıcı engellenenler listenize eklendi."
+  },
+  "remove": {
+    "guild": "{{guildName}} adlı sunucu engellenenler listenizden kaldırıldı.",
+    "user": "{{userName}} adlı kullanıcı engellenenler listenizden kaldırıldı."
+  }
+}
