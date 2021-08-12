@@ -1,0 +1,19 @@
+{
+  "embed": {
+    "title": "Yardım Menüsü",
+    "usage": "Bir komut hakkında daha fazla bilgi edinmek için bu komudu {{helpCommand}} {{commandName}} şeklinde kullanın.",
+    "example": "Örneğin: {{example}}.",
+    "v": {
+      "command": "komut",
+      "commands": "Komutlar",
+      "usage": "Kullanım"
+    }
+  },
+  "commands": {
+    "ping": "Beni pingler.",
+    "block": "Bir kullanıcıyı engelleyin/engelini kaldırın ya da daha önce engellediğiniz kullanıcıları görün.",
+    "play": "Arkadaşınızla ya da yapay zeka ile Tic-Tac-Toe oynayın.",
+    "language": "Bu sunucu için kullanılacak dili ayarlayın, ya da şu an kullanılan dili görün.",
+    "help": "Yardım menüsünü gösterir."
+  }
+}
