@@ -1,0 +1,14 @@
+{
+  "set": {
+    "languageNotSupported": "Bu dil desteklenmiyor, yazım hatası yapıp yapmadığınızı kontrol edin. Aşağıda desteklenen dilleri görebilirsiniz.",
+    "success": "Sunucu dili değiştirildi, yeni dil: {{language}}.",
+    "error": "Dil değiştirirken bir hata oluştu, lütfen bize ulaşın."
+  },
+  "show": "Bu sunucunun dili: {{language}}",
+  "help": {
+    "available": "Mevcut Diller",
+    "crowdin": "Çeviri durumunu görmek, ya da Tic-Tac-Toe'yu dilinize çevirmek ister misiniz?",
+    "visitcrowdin": "Crowdin sayfamızı ziyaret edin",
+    "disclaimer": "Tic-Tac-Toe topluluk tarafından çevirilmektedir. Bazen çevirilmemiş şeyler olabilir, bize bunlar için yardım edebilirsiniz."
+  }
+}

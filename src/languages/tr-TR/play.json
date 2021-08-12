@@ -1,0 +1,23 @@
+{
+  "uGame": {
+    "turn": "Sıra: {{user}}. Hamle yapmak için 30 saniyen var.",
+    "win": "{{user}} kazandı!",
+    "dmm": "{{user}}, 30 saniye içinde hamle yapmadı."
+  },
+  "error": {
+    "bot": "Diğer botlarla oynayamazsın.",
+    "self": "Kendinle oynayamazsın, şapşal."
+  },
+  "invite": {
+    "accept": "Kabul Et",
+    "decline": "Reddet",
+    "invited": "{{user}} davet edildi. Kabul etmek için 1 dakikası var.",
+    "declined": "{{user}} oyun davetini reddetti."
+  },
+  "blocked": {
+    "u1": "Bu kullanıcı sizi engelledi.",
+    "g1": "Bu kullanıcı bu sunucuyu engelledi.",
+    "u2": "Bu kullanıcıyı engellediniz.",
+    "g2": "Bu sunucuyu engellediniz."
+  }
+}
