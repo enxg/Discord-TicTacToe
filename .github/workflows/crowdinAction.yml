@@ -5,8 +5,7 @@ on:
     branches: [ main ]
   schedule:
     - cron: '0 */12 * * *'
-  workflow_dispatch:
-    inputs: {}
+  workflow_dispatch: {}
 
 jobs:
   crowdin:
