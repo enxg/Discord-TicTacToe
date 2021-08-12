@@ -2,7 +2,8 @@
   "uGame": {
     "turn": "{{user}}'s Turn. You have 30 seconds to make a move.",
     "win": "{{user}} won!",
-    "dmm": "{{user}} didn't make a move in 30 seconds."
+    "dmm": "{{user}} didn't make a move in 30 seconds.",
+    "tie": "Tie!"
   },
   "error": {
     "bot": "You can't play with the other bots.",

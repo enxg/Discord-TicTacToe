@@ -133,7 +133,7 @@ class command extends Command {
 
           const win = await this.calculateWin(board);
           if (win) return m.edit({ content: t("play:uGame.win", { user: `${turn.p}` }), components: await this.buildButtons(board, true) });
-          if (!board.includes(null)) return m.edit({ content: "Tie!", components: await this.buildButtons(board, true) });
+          if (!board.includes(null)) return m.edit({ content: t("play:uGame.tie"), components: await this.buildButtons(board, true) });
 
           turn.p = turn.p === msg.author ? user : msg.author;
 
