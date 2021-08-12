@@ -1,0 +1,14 @@
+{
+  "set": {
+    "languageNotSupported": "This language is not supported, check if you made any typos. You can see supported languages below.",
+    "success": "Changed the language for this server to {{language}}.",
+    "error":"An error occurred while changing the language, please contact us."
+  },
+  "show": "Language for this server is {{language}}",
+  "help": {
+    "available": "Available Languages",
+    "crowdin": "Want to see translation status, or want to translate Tic-Tac-Toe to your language?",
+    "visitcrowdin": "Visit our Crowdin",
+    "disclaimer": "Tic-Tac-Toe is translated by the community. Sometimes there can be things that are not translated, you can help us with these."
+  }
+}

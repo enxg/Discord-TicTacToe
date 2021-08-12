@@ -27,7 +27,7 @@ import {
   User,
 } from "discord.js";
 
-import emojis from "../config/emojis.json";
+import emojis from "#config/emojis.json";
 
 type square = "X" | "O" | null;
 
@@ -37,7 +37,6 @@ class command extends Command {
   constructor(context: PieceContext) {
     super(context, {
       name: "play",
-      description: "Play Tic-Tac-Toe with your friend or with the AI.",
     });
 
     this.leaderboard = this.container.db.collection("leaderboard");
@@ -102,12 +101,14 @@ class command extends Command {
   }
 
   async uGame(msg: Message, user: User) {
+    const t = await this.container.fetchT(msg);
+
     const board: square[] = Array(9).fill(null);
     const turn = {
       p: Math.random() <= 0.5 ? msg.author : user,
       isX: true,
     };
-    const turnText = () => `${turn.p}'s Turn. You have 30 seconds to make a move.`;
+    const turnText = () => t("play:uGame.turn", { user: `${turn.p}` });
 
     const m = await msg.channel.send({ content: emojis.loading });
     const filter = (i: ButtonInteraction) => {
@@ -116,7 +117,7 @@ class command extends Command {
     };
 
     const wp = async () => {
-      // FIXME: If message is deleted, bot will crash.
+      // FIXED: If message is deleted, bot will crash.
 
       m.edit({ content: turnText(), components: await this.buildButtons(board) });
       m.awaitMessageComponent({ filter, componentType: "BUTTON", time: 30000 })
@@ -125,14 +126,17 @@ class command extends Command {
           turn.isX = !turn.isX;
 
           const win = await this.calculateWin(board);
-          if (win) return m.edit({ content: `${turn.p} won!`, components: await this.buildButtons(board, true) });
+          if (win) return m.edit({ content: t("play:uGame.win", { user: `${turn.p}` }), components: await this.buildButtons(board, true) });
           if (!win && !board.includes(null)) return m.edit({ content: "Tie!", components: await this.buildButtons(board, true) });
 
           turn.p = turn.p === msg.author ? user : msg.author;
 
           wp();
         })
-        .catch(() => m.reply({ content: `${turn.p} didn't make a move in 30 seconds.` }));
+        .catch(e => {
+          this.container.sentry.captureException(e);
+          msg.channel.send({ content: t("play:uGame.dmm", { user: `${turn.p}` }) });
+        });
     };
 
     wp();
@@ -146,50 +150,58 @@ class command extends Command {
   }
 
   async run(msg: Message, args: Args) {
-    const user = await args.pickResult("user");
+    try {
+      const t = await this.container.fetchT(msg);
+      const { captureException } = this.container.sentry;
 
-    if (!user.success) return this.AIgame(msg);
-    if (user.value.bot && user.value !== this.container.client.user) return msg.channel.send("You can't play with the other bots.");
-    if (user.value === this.container.client.user) return this.AIgame(msg);
-    if (msg.author === user.value) return msg.channel.send("You can't play with yourself, dummy.");
+      const user = await args.pickResult("user");
 
-    const row = new MessageActionRow()
-      .addComponents([
-        {
-          label: "Accept",
-          type: "BUTTON",
-          style: "SUCCESS",
-          customId: "accept",
-        },
-        {
-          label: "Decline",
-          type: "BUTTON",
-          style: "DANGER",
-          customId: "decline",
-        },
-      ]);
+      if (!user.success) return this.AIgame(msg);
+      if (user.value.bot && user.value !== this.container.client.user) return msg.channel.send(t("play:error.bot"));
+      if (user.value === this.container.client.user) return this.AIgame(msg);
+      if (msg.author === user.value) return msg.channel.send(t("play:error.self"));
 
-    const m = await msg.channel.send({ content: `Invited ${user.value}. They have one minute to accept.`, components: [row] });
+      const row = new MessageActionRow()
+        .addComponents([
+          {
+            label: t("play:invite.accept"),
+            type: "BUTTON",
+            style: "SUCCESS",
+            customId: "accept",
+          },
+          {
+            label: t("play:invite.decline"),
+            type: "BUTTON",
+            style: "DANGER",
+            customId: "decline",
+          },
+        ]);
 
-    row.components.forEach(c => c.setDisabled(true));
+      const m = await msg.channel.send({
+        content: t("play:invite.invited", { user: `${user.value}` }),
+        components: [row],
+      });
 
-    const collector = m.createMessageComponentCollector({ componentType: "BUTTON", time: 60000 });
+      row.components.forEach(c => c.setDisabled(true));
 
-    collector.on("collect", async (i): Promise<any> => {
-      await i.deferUpdate();
-      if (i.user !== user.value) return;
-      if (i.customId === "decline") {
-        await m.reply({ content: `${user.value.tag} declined the game invite.` });
+      const collector = m.createMessageComponentCollector({ componentType: "BUTTON", time: 60000 });
+
+      collector.on("collect", async (i): Promise<any> => {
+        await i.deferUpdate();
+        if (i.user !== user.value) return;
+        if (i.customId === "decline") {
+          await m.reply({ content: t("play:invite.declined", { user: user.value.tag }) });
+          await m.edit({ components: [row] });
+        }
+        if (i.customId !== "accept") return;
         await m.edit({ components: [row] });
-      }
-      if (i.customId !== "accept") return;
-      await m.edit({ components: [row] });
-      return this.uGame(msg, user.value);
-    });
+        return this.uGame(msg, user.value);
+      });
 
-    collector.on("end", async () => {
-      await m.edit({ components: [row] });
-    });
+      collector.on("end", async (): Promise<any> => m.edit({ components: [row] }).catch(e => captureException(e)));
+    } catch(e) {
+      this.container.sentry.captureException(e);
+    }
   }
 }
 

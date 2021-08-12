@@ -1,0 +1,19 @@
+{
+  "embed": {
+    "title": "Help Menu",
+    "usage": "Use {{helpCommand}} {{commandName}} to learn more about that command.",
+    "example": "For example: {{example}}.",
+    "v": {
+      "command": "command",
+      "commands": "Commands",
+      "usage": "Usage"
+    }
+  },
+  "commands": {
+    "ping": "Pings me.",
+    "block": "Block/unblock a user or see the users you blocked before.",
+    "play": "Play Tic-Tac-Toe with your friend or with the AI.",
+    "language": "Set the language that will be used for this guild, or see the current language.",
+    "help": "Shows the help menu."
+  }
+}

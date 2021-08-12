@@ -1,0 +1,42 @@
+{
+  "errors": {
+    "didnt_block": "You didn't block any user/guild before.",
+    "didnt_block_user": "You didn't block any users.",
+    "didnt_block_guild": "You didn't block any guilds.",
+    "add": {
+      "guild": "An error occurred while adding guild to your blocklist, please contact us.",
+      "user": {
+        "none": "No user specified.",
+        "self": "You can't block yourself, dummy.",
+        "bot": "You can't block a bot.",
+        "cantadd": "An error occurred while adding the user to your blocklist, please contact us."
+      }
+    },
+    "remove": {
+      "guild": "An error occurred while removing the guild from your blocklist, please contact us.",
+      "user": {
+        "none": "No user specified.",
+        "self": "You can't block/unblock yourself, dummy.",
+        "bot": "You can't block/unblock a bot.",
+        "cantremove": "An error occurred while removing the user from your blocklist, please contact us."
+      }
+    },
+    "cant_fetch": {
+      "user": "Can't fetch the user.",
+      "guild": "Can't fetch the guild."
+    }
+  },
+  "your_blocklist": "Your blocklist",
+  "blocked": {
+    "users": "Blocked Users",
+    "guilds": "Blocked Guilds"
+  },
+  "add": {
+    "guild": "Added guild named {{guildName}} to your blocklist.",
+    "user": "Added user named {{userName}} to your blocklist."
+  },
+  "remove": {
+    "guild": "Removed guild named {{guildName}} from your blocklist.",
+    "user": "Removed {{userName}} from your blocklist."
+  }
+}

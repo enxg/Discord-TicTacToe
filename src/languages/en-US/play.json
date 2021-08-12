@@ -1,0 +1,17 @@
+{
+  "uGame": {
+    "turn": "{{user}}'s Turn. You have 30 seconds to make a move.",
+    "win": "{{user}} won!",
+    "dmm": "{{user}} didn't make a move in 30 seconds."
+  },
+  "error": {
+    "bot": "You can't play with the other bots.",
+    "self": "You can't play with yourself, dummy."
+  },
+  "invite": {
+    "accept": "Accept",
+    "decline": "Decline",
+    "invited": "Invited {{user}}. They have one minute to accept.",
+    "declined": "{{user}} declined the game invite."
+  }
+}

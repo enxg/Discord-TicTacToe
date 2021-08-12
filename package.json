@@ -21,9 +21,15 @@
     "@sapphire/plugin-i18next": "next",
     "@sapphire/plugin-subcommands": "next",
     "@sapphire/utilities": "next",
+    "@sentry/node": "^6.11.0",
+    "@sentry/tracing": "^6.11.0",
+    "axios": "^0.21.1",
     "discord.js": "^13.0.0",
     "dotenv": "^10.0.0",
     "firebase-admin": "^9.11.0"
+  },
+  "imports": {
+    "#config/*": "./dist/config/*"
   },
   "scripts": {
     "lint": "eslint --ext .ts src/",
@@ -33,5 +39,6 @@
   },
   "engines": {
     "node": ">=16.6.0"
-  }
+  },
+  "packageManager": "yarn@3.0.0"
 }

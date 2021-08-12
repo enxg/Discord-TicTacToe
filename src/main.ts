@@ -20,6 +20,9 @@ import dotenv from "dotenv";
 import firebase from "firebase-admin";
 import "@sapphire/plugin-i18next/register";
 import { SapphireClient, container } from "@sapphire/framework";
+import { fetchT } from "@sapphire/plugin-i18next";
+import Sentry from "@sentry/node";
+import Tracing from "@sentry/tracing";
 
 type Opaque<T, K extends string> = T & { __typename: K }
 type Base64 = Opaque<string, "base64">
@@ -31,6 +34,12 @@ const firebaseToken: Base64 = process.env.FIREBASE_TOKEN as Base64;
 firebase.initializeApp({
   credential: firebase.credential.cert(JSON.parse(Buffer.from(firebaseToken, "base64").toString("utf-8"))),
 });
+const firestore = firebase.firestore();
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  tracesSampleRate: 1.0,
+});
 
 const client = new SapphireClient({
   shards: "auto",
@@ -38,22 +47,51 @@ const client = new SapphireClient({
   presence: {
     activities: [
       {
-        name: "Tic-Tac-Toe",
+        name: "Tic-Tac-Toe | t.help | ttt.infinixlabs.xyz",
         type: "PLAYING",
       },
     ],
   },
   defaultPrefix: "t.",
   allowedMentions: {},
+  i18n: {
+    i18next: {
+      ns: ["common", "play", "block", "language", "help"],
+      defaultNS: "common",
+      load: "all",
+      fallbackLng: "en-US",
+      lng: "en-US",
+    },
+    defaultNS: "common",
+    async fetchLanguage(ctx) {
+      if (!ctx.guild) return "en-US";
+      const language = await firestore.collection("languages").doc(ctx.guild.id).get();
+      return language.exists ? await language.data()!["language"] as string : "en-US";
+    },
+  },
 });
 
 container.db = firestore;
 container.fb = firebase;
+container.fetchT = fetchT;
+container.sentry = Sentry;
 
 declare module "@sapphire/pieces" {
   interface Container {
     db: FirebaseFirestore.Firestore,
     fb: typeof firebase,
+    fetchT: typeof fetchT,
+    sentry: typeof Sentry,
+  }
+}
+
+declare module "@sapphire/framework" {
+  interface ArgType {
+    language: string,
+  }
+
+  interface Preconditions {
+    "OwnerOnly": never,
   }
 }
 

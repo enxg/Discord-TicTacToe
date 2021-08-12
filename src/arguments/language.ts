@@ -16,30 +16,26 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Command, PieceContext } from "@sapphire/framework";
-import { Message, MessageEmbed } from "discord.js";
+import { Argument, PieceContext } from "@sapphire/framework";
 
-import emojis from "../config/emojis.json";
-
-class command extends Command {
+class argument extends Argument<string> {
   constructor(context: PieceContext) {
     super(context, {
-      name: "ping",
-      description: "Pings me.",
+      name: "language",
     });
   }
 
-  async run(msg: Message) {
-    const m = await msg.channel.send({ content: emojis.loading });
-    const ping = m.createdTimestamp - msg.createdTimestamp;
-    const embed = new MessageEmbed()
-      .setColor(ping < 60 ? "#2a9d8f" : "#e9c46a")
-      .setTitle("🏓 Pong!")
-      .setDescription(`Message Ping: ${ping} \n WebSocket Ping: ${this.container.client.ws.ping}`)
-      .setTimestamp();
+  async run(parameter: string) {
+    if (!this.container.i18n.languages.has(parameter)) {
+      return this.error({
+        parameter,
+        identifier: "languageNotSupported",
+        message: "This language isn't supported.",
+      });
+    }
 
-    await m.edit({ embeds: [embed], content: null });
+    return this.ok(parameter);
   }
 }
 
-export default command;
+export default argument;

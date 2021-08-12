@@ -18,7 +18,9 @@
 
 import { PieceContext, Args } from "@sapphire/framework";
 import { SubCommandPluginCommand } from "@sapphire/plugin-subcommands";
-import { Message, MessageEmbed } from "discord.js";
+import { ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { TFunction } from "@sapphire/plugin-i18next";
+import colors from "#config/colors.json";
 
 type id = string | `${bigint}`;
 
@@ -28,7 +30,6 @@ class command extends SubCommandPluginCommand {
   constructor(context: PieceContext) {
     super(context, {
       name: "block",
-      description: "Block/unblock a user or see the users you blocked before.",
       subCommands: ["add", "remove", { input: "list", default: true }],
       flags: ["guild"],
     });
@@ -36,91 +37,111 @@ class command extends SubCommandPluginCommand {
     this.collection = this.container.db.collection("blocks");
   }
 
-  async listUser(list: FirebaseFirestore.DocumentData | undefined) {
-    if (!list || list["blockedUsers"] == null || list["blockedUsers"].length === 0) return ["You didn't block any users."];
+  async listUser(list: FirebaseFirestore.DocumentData | undefined, t: TFunction) {
+    if (!list || list["blockedUsers"] == null || list["blockedUsers"].length === 0) return [t("block:errors.didnt_block_user")];
 
     // eslint-disable-next-line prefer-destructuring
     const blockedUsers: id[] = list["blockedUsers"];
     return Promise.all(blockedUsers.map(async (u: id) => {
       const user = await this.container.client.users.fetch(u as `${bigint}`);
-      return `${user?.tag ?? "Can't fetch the user"} - ${u}`;
+      return `${user?.tag ?? t("block:errors.cant_fetch.user")} - ${u}`;
     }));
   }
 
-  async listGuild(list: FirebaseFirestore.DocumentData | undefined) {
-    if (!list || list["blockedGuilds"] == null || list["blockedGuilds"].length === 0) return ["You didn't block any guilds."];
+  async listGuild(list: FirebaseFirestore.DocumentData | undefined, t: TFunction) {
+    if (!list || list["blockedGuilds"] == null || list["blockedGuilds"].length === 0) return [t("block:errors.didnt_block_guild")];
 
     // eslint-disable-next-line prefer-destructuring
     const blockedGuilds: id[] = list["blockedGuilds"];
     return Promise.all(blockedGuilds.map(async (u: id) => {
       const guild = await this.container.client.guilds.fetch(u as `${bigint}`);
-      return `${guild?.name ?? "Can't fetch the guild"} - ${u}`;
+      return `${guild?.name ?? t("block:errors.cant_fetch.block")} - ${u}`;
     }));
   }
 
   async list(msg: Message) {
+    const t = await this.container.fetchT(msg);
     const doc = await this.collection.doc(msg.author.id).get();
 
-    if (!doc.exists) return msg.channel.send({ content: "You didn't block any user/guild before." });
+    if (!doc.exists) return msg.channel.send({ content: t("block:errors.didnt_block") });
 
     const blocklist = doc.data();
-    const blockedUsers = await this.listUser(blocklist);
-    const blockedGuilds = await this.listGuild(blocklist);
+    const blockedUsers = await this.listUser(blocklist, t);
+    const blockedGuilds = await this.listGuild(blocklist, t);
 
     this.container.logger.info(blockedUsers);
     this.container.logger.info(blockedGuilds);
 
     const embed = new MessageEmbed()
-      .setTitle("Your blocklist")
-      .addField("Blocked Users", blockedUsers.join("\n"))
-      .addField("Blocked Guilds", blockedGuilds.join("\n"))
+      .setTitle(t("block:your_blocklist"))
+      .addField(t("block:blocked.users"), blockedUsers.join("\n"))
+      .addField(t("block:blocked.guilds"), blockedGuilds.join("\n"))
+      .setColor(colors.red as ColorResolvable)
       .setTimestamp();
 
     return msg.channel.send({ embeds: [embed] });
   }
 
   async add(msg: Message, args: Args) {
+    const t = await this.container.fetchT(msg);
+    const { captureException } = this.container.sentry;
+
     if (args.getFlags("guild")) {
       return this.collection.doc(msg.author.id).set({
         blockedGuilds: this.container.fb.firestore.FieldValue.arrayUnion(msg.guild?.id),
       }, { merge: true })
-        .then(() => msg.channel.send({ content: `Added guild named ${msg.guild?.name} to your blocklist.` }))
-        .catch(() => msg.channel.send({ content: "An error occurred while adding guild to your blocklist, please contact us." }));
+        .then(() => msg.channel.send({ content: t("block:add.guild", { guildName: `\`${msg.guild?.name}\`` }) }))
+        .catch(e => {
+          captureException(e);
+          msg.channel.send({ content: t("block:errors.add.guild") });
+        });
     }
 
     const user = await args.pickResult("user");
 
-    if (!user.success) return msg.channel.send({ content: "No user specified." });
-    if (user.value.id === msg.author.id) return msg.channel.send({ content: "You can't block yourself, dummy." });
-    if (user.value.bot) return msg.channel.send({ content: "You can't block a bot." });
+    if (!user.success) return msg.channel.send({ content: t("block:errors.add.user.none") });
+    if (user.value.id === msg.author.id) return msg.channel.send({ content: t("block:errors.add.user.self") });
+    if (user.value.bot) return msg.channel.send({ content: t("block:errors.add.user.bot") });
 
     return this.collection.doc(msg.author.id).set({
       blockedUsers: this.container.fb.firestore.FieldValue.arrayUnion(user.value.id),
     }, { merge: true })
-      .then(() => msg.channel.send({ content: `Added \`${user.value.tag}\` to your blocklist.` }))
-      .catch(() => msg.channel.send({ content: "An error occurred while adding user to your blocklist, please contact us." }));
+      .then(() => msg.channel.send({ content: t("block:add.user", { userName: `\`${user.value.tag}\`` }) }))
+      .catch(e => {
+        captureException(e);
+        msg.channel.send({ content: t("block:errors.add.user.cantadd") });
+      });
   }
 
   async remove(msg: Message, args: Args) {
+    const t = await this.container.fetchT(msg);
+    const { captureException } = this.container.sentry;
+
     if (args.getFlags("guild")) {
       return this.collection.doc(msg.author.id).set({
         blockedGuilds: this.container.fb.firestore.FieldValue.arrayRemove(msg.guild?.id),
       }, { merge: true })
-        .then(() => msg.channel.send({ content: `Removed guild named \`${msg.guild?.name}\` from your blocklist.` }))
-        .catch(() => msg.channel.send({ content: "An error occured while removing guild from your blocklist, please contact us." }));
+        .then(() => msg.channel.send({ content: t("block:remove.guild", { guildName: `\`${msg.guild?.name}\`` }) }))
+        .catch(e => {
+          captureException(e);
+          msg.channel.send({ content: t("block:errors.remove.guild") });
+        });
     }
 
     const user = await args.pickResult("user");
 
-    if (!user.success) return msg.channel.send({ content: "No user specified." });
-    if (user.value.id === msg.author.id) return msg.channel.send({ content: "You can't block/unblock yourself, dummy." });
-    if (user.value.bot) return msg.channel.send({ content: "You can't block/unblock a bot." });
+    if (!user.success) return msg.channel.send({ content: t("block:errors.remove.user.none") });
+    if (user.value.id === msg.author.id) return msg.channel.send({ content: t("block:errors.remove.user.self") });
+    if (user.value.bot) return msg.channel.send({ content: t("block:errors.remove.user.bot") });
 
     return this.collection.doc(msg.author.id).set({
       blockedUsers: this.container.fb.firestore.FieldValue.arrayRemove(user.value.id),
     }, { merge: true })
-      .then(() => msg.channel.send({ content: `Removed \`${user.value.tag}\` from your blocklist.` }))
-      .catch(() => msg.channel.send({ content: "An error occurred while removing user from your blocklist, please contact us." }));
+      .then(() => msg.channel.send({ content: t("block:remove.user", { userName: `\`${user.value.tag}\`` }) }))
+      .catch(e => {
+        captureException(e);
+        msg.channel.send({ content: t("block:errors.remove.user.cantremove") });
+      });
   }
 }
 
