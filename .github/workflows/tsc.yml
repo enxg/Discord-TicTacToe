@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  lint:
+  tsc:
     runs-on: ubuntu-latest
     steps:
       - name: Check-out repo
