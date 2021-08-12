@@ -56,7 +56,7 @@ const client = new SapphireClient({
   allowedMentions: {},
   i18n: {
     i18next: {
-      ns: ["common", "play", "block", "language", "help"],
+      ns: ["common", "play", "block", "language", "help", "invite"],
       defaultNS: "common",
       load: "all",
       fallbackLng: "en-US",
