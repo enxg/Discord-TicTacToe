@@ -1,0 +1,19 @@
+{
+  "embed": {
+    "title": "Kömək Menyusu",
+    "usage": "Bu komanda haqqında daha çox məlumat əldə etmək üçün {{helpCommand}} {{commandName}} istifadə edin.",
+    "example": "Məsələn: {{example}}.",
+    "v": {
+      "command": "əmr",
+      "commands": "Əmrlər",
+      "usage": "İstifadə"
+    }
+  },
+  "commands": {
+    "ping": "Məni çağır.",
+    "block": "Bir istifadəçini blok edin/blokdan çıxarın və ya blok etdiyiniz istifadəçilərə baxın.",
+    "play": "Dostunuzla və ya AI ilə Tic-Tac-Toe oynayın.",
+    "language": "Bu topluluq üçün istifadə ediləcək dili seçin və ya mövcud dilə baxın.",
+    "help": "Kömək menyusunu göstər."
+  }
+}
