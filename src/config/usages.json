@@ -1,5 +1,5 @@
 {
-  "block": "<add | remove | **list**> [@User#1234 | UserID]",
+  "block": "<add | remove | **list**> [@User#1234 | UserID | --guild]",
   "language": "<set | show | **help**> [language]",
   "play": "[@User#1234 | UserID]",
   "help": "[command]"
