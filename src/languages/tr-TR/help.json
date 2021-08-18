@@ -1,7 +1,7 @@
 {
   "embed": {
     "title": "Yardım Menüsü",
-    "usage": "Bir komut hakkında daha fazla bilgi edinmek için bu komudu {{helpCommand}} {{commandName}} şeklinde kullanın.",
+    "usage": "Bir komut hakkında daha fazla bilgi edinmek için bu komutu {{helpCommand}} {{commandName}} şeklinde kullanın.",
     "example": "Örneğin: {{example}}.",
     "v": {
       "command": "komut",

@@ -1,0 +1,24 @@
+{
+  "uGame": {
+    "turn": "Turno de {{user}}. Tienes 30 segundos para moverte.",
+    "win": "¡{{user}} ha ganado!",
+    "dmm": "{{user}} no realizo un movimiento en 30 segundos.",
+    "tie": "¡Empate!"
+  },
+  "error": {
+    "bot": "No puedes jugar con los otros bots.",
+    "self": "No puedes jugar contigo mismo, tontito."
+  },
+  "invite": {
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "invited": "Se ha invitado a {{user}}. Tienen un minuto para aceptar.",
+    "declined": "{{user}} rechazó la invitación al juego."
+  },
+  "blocked": {
+    "u1": "Este usuario te ha bloqueado.",
+    "g1": "Este usuario bloqueó este gremio.",
+    "u2": "Has bloqueado a este usuario.",
+    "g2": "Has bloqueado a este gremio."
+  }
+}

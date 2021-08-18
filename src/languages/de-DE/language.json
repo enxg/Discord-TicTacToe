@@ -1,0 +1,14 @@
+{
+  "set": {
+    "languageNotSupported": "Diese Sprache wird nicht unterstützt. Überprüfe, ob du einen Tippfehler gemacht hast. Du kannst unten alle unterstützte Sprachen sehen.",
+    "success": "Die Sprache für diesen Server wurde auf {{language}} geändert.",
+    "error": "Beim Ändern der Sprache ist ein Fehler aufgetreten. Bitte kontaktieren Sie uns."
+  },
+  "show": "Die Sprache für diesen Server ist {{language}}",
+  "help": {
+    "available": "Verfügbare Sprachen",
+    "crowdin": "Möchtest du den Übersetzungsstatus sehen oder Tic-Tac-Toe in deine Sprache übersetzen?",
+    "visitcrowdin": "Besuche unser Crowdin",
+    "disclaimer": "Tic-Tac-Toe wird von der Community übersetzt. Manchmal kann es Dinge geben, die noch nicht übersetzt sind. Du kannst uns dabei helfen."
+  }
+}
