@@ -1,0 +1,42 @@
+{
+  "errors": {
+    "didnt_block": "No has bloqueado a ningún usuario/gremio antes.",
+    "didnt_block_user": "No has bloqueado a ningún usuario.",
+    "didnt_block_guild": "No has bloqueado a ningún gremio.",
+    "add": {
+      "guild": "Se ha producido un error al añadir el gremio a tu lista de bloqueos, por favor contáctenos.",
+      "user": {
+        "none": "No se especificó un usuario.",
+        "self": "No puedes bloquearte a ti mismo, tontito.",
+        "bot": "No puedes bloquear a un bot.",
+        "cantadd": "Se ha producido un error al añadir el usuario a tu lista de bloqueos, por favor contáctenos."
+      }
+    },
+    "remove": {
+      "guild": "Se ha producido un error al eliminar el gremio de tu lista de bloqueos, por favor contáctenos.",
+      "user": {
+        "none": "No se especificó un usuario.",
+        "self": "No puedes bloquearte/desbloquearte a ti mismo, tontito.",
+        "bot": "No puedes bloquear/desbloquear a un bot.",
+        "cantremove": "Se ha producido un error al eliminar el usuario de tu lista de bloqueos, por favor contáctenos."
+      }
+    },
+    "cant_fetch": {
+      "user": "No se ha podido obtener el usuario.",
+      "guild": "No se ha podido obtener el gremio."
+    }
+  },
+  "your_blocklist": "Tu lista de bloqueos",
+  "blocked": {
+    "users": "Usuarios bloqueados",
+    "guilds": "Gremios bloqueados"
+  },
+  "add": {
+    "guild": "Se ha añadido el gremio llamado {{guildName}} a tu lista de bloqueos.",
+    "user": "Se ha añadido al usuario llamado {{userName}} a tu lista de bloqueos."
+  },
+  "remove": {
+    "guild": "Se ha eliminado el gremio llamado {{guildName}} de tu lista de bloqueos.",
+    "user": "Se ha eliminado a {{userName}} de tu lista de bloqueos."
+  }
+}

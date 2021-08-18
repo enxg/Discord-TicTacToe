@@ -1,0 +1,24 @@
+{
+  "uGame": {
+    "turn": "{{user}} ist an der Reihe. Du hast 30 Sekunden, um einen Zug zu machen.",
+    "win": "{{user}} hat gewonnen!",
+    "dmm": "{{user}} hat in 30 Sekunden keinen Zug gemacht.",
+    "tie": "Unentschieden!"
+  },
+  "error": {
+    "bot": "Du kannst nicht mit den anderen Bots spielen.",
+    "self": "Du kannst nicht gegen dich selbst spielen, Dummkopf."
+  },
+  "invite": {
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen",
+    "invited": "{{user}} eingeladen. Sie haben eine Minute Zeit um zu akzeptieren.",
+    "declined": "{{user}} hat die Spieleinladung abgelehnt."
+  },
+  "blocked": {
+    "u1": "Dieser Benutzer hat dich blockiert.",
+    "g1": "Dieser Benutzer hat diese Gilde blockiert.",
+    "u2": "Du hast diesen Benutzer blockiert.",
+    "g2": "Du hast diese Gilde blockiert."
+  }
+}

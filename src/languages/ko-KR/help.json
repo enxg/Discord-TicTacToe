@@ -1,0 +1,19 @@
+{
+  "embed": {
+    "title": "도움말 메뉴",
+    "usage": "{{helpCommand}} {{commandName}} 명령어를 통해 해당 명령어에 대해 더 자세히 알아볼 수 있습니다.",
+    "example": "예: {{example}}.",
+    "v": {
+      "command": "명령어",
+      "commands": "명령어",
+      "usage": "사용법"
+    }
+  },
+  "commands": {
+    "ping": "저에게 핑을 전송합니다.",
+    "block": "사용자를 차단/차단 해제하거나 이전에 차단한 사용자를 확인합니다.",
+    "play": "Tic-Tac-Toe를 친구나 AI와 플레이합니다.",
+    "language": "이 서버에서 쓰일 언어를 설정하거나, 현재 쓰는 언어를 확인합니다.",
+    "help": "도움말 메뉴를 보여줍니다."
+  }
+}

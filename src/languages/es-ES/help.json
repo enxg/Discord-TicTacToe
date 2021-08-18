@@ -1,0 +1,19 @@
+{
+  "embed": {
+    "title": "Menú de ayuda",
+    "usage": "Usa {{helpCommand}}{{commandName}} para aprender más acerca de este comando.",
+    "example": "Por ejemplo: {{example}}.",
+    "v": {
+      "command": "comando",
+      "commands": "Comandos",
+      "usage": "Uso"
+    }
+  },
+  "commands": {
+    "ping": "Me menciona.",
+    "block": "Bloquea/desbloquea a un usuario o mira a los usuarios que bloqueaste antes.",
+    "play": "Juega Tic-Tac-Toe con tu amigo o con la IA.",
+    "language": "Establece el idioma que será usado para este gremio, o mira el idioma actual.",
+    "help": "Muestra el menú de ayuda."
+  }
+}

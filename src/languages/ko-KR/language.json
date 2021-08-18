@@ -1,0 +1,14 @@
+{
+  "set": {
+    "languageNotSupported": "이 언어로는 지원하지 않습니다. 철자를 다시 확인해주세요. 다음은 지원 중인 언어 목록입니다.",
+    "success": "이 서버의 언어를 {{language}}(으)로 변경했습니다.",
+    "error": "언어를 변경하는 도중 오류가 발생했습니다. 저희에게 문의해주세요."
+  },
+  "show": "이 서버의 언어는 {{language}}입니다.",
+  "help": {
+    "available": "지원 언어",
+    "crowdin": "번역 상태를 확인하거나, Tic-Tac-Toe를 당신의 언어로 번역하고 싶나요?",
+    "visitcrowdin": "Crowdin 방문",
+    "disclaimer": "Tic-Tac-Toe는 커뮤니티에서 번역되었습니다. 번역되지 않은 항목들이 있을 수 있으며, 이에 대해 기여를 진행하실 수 있습니다."
+  }
+}

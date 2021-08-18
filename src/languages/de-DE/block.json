@@ -1,0 +1,42 @@
+{
+  "errors": {
+    "didnt_block": "Du hast keine Benutzer/Gilde zuvor blockiert.",
+    "didnt_block_user": "Du hast keine Benutzer blockiert.",
+    "didnt_block_guild": "Du hast keine Gilden blockiert.",
+    "add": {
+      "guild": "Beim Hinzufügen der Gilde zu deiner Blockliste ist ein Fehler aufgetreten. Bitte kontaktiere uns.",
+      "user": {
+        "none": "Kein Benutzer angegeben.",
+        "self": "Du kannst dich nicht selbst blockieren, Dummkopf.",
+        "bot": "Du kannst keinen Bot blockieren.",
+        "cantadd": "Beim Hinzufügen des Benutzers zu deiner Blockliste ist ein Fehler aufgetreten. Bitte kontaktiere uns."
+      }
+    },
+    "remove": {
+      "guild": "Beim Entfernen der Gilde von deiner Blockliste ist ein Fehler aufgetreten. Bitte kontaktiere uns.",
+      "user": {
+        "none": "Kein Benutzer angegeben.",
+        "self": "Du kannst dich nicht selbst blockieren/entblockieren, Dummkopf.",
+        "bot": "Du kannst keinen Bot blockieren/entblockieren.",
+        "cantremove": "Beim Entfernen des Benutzers von deiner Blockliste ist ein Fehler aufgetreten. Bitte kontaktiere uns."
+      }
+    },
+    "cant_fetch": {
+      "user": "Der Benutzer kann nicht abgerufen werden.",
+      "guild": "Die Gilde kann nicht abgerufen werden."
+    }
+  },
+  "your_blocklist": "Deine Blockliste",
+  "blocked": {
+    "users": "Blockierte Benutzer",
+    "guilds": "Blockierte Gilden"
+  },
+  "add": {
+    "guild": "Gilde mit dem Namen {{guildName}} wurde zu deiner Blockliste hinzugefügt.",
+    "user": "Benutzer mit dem Namen {{userName}} wurde zu deiner Blockliste hinzugefügt."
+  },
+  "remove": {
+    "guild": "Gilde mit dem Namen {{guildName}} wurde von deiner Blockliste entfernt.",
+    "user": "Benutzer mit dem Namen {{userName}} wurde von deiner Blockliste entfernt."
+  }
+}
