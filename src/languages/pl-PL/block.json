@@ -1,0 +1,42 @@
+{
+  "errors": {
+    "didnt_block": "Nie zablokowano wcześniej żadnego użytkownika/gildii.",
+    "didnt_block_user": "Nie zablokowano żadnych użytkowników.",
+    "didnt_block_guild": "Nie zablokowano żadnych gildii.",
+    "add": {
+      "guild": "Wystąpił błąd podczas dodawania gildii do listy blokowania. Skontaktuj się z nami.",
+      "user": {
+        "none": "Nie określono użytkownika.",
+        "self": "Nie możesz zablokować siebie, żartownisiu.",
+        "bot": "Nie możesz zablokować bota.",
+        "cantadd": "Wystąpił błąd podczas dodawania użytkownika do listy blokowania. Skontaktuj się z nami."
+      }
+    },
+    "remove": {
+      "guild": "Wystąpił błąd podczas usuwania gildii z listy blokowania. Skontaktuj się z nami.",
+      "user": {
+        "none": "Nie określono użytkownika.",
+        "self": "Nie możesz zablokować/odblokować siebie, żartownisiu.",
+        "bot": "Nie możesz zablokować/odblokować bota.",
+        "cantremove": "Wystąpił błąd podczas usuwania użytkownika z listy blokowania. Skontaktuj się z nami."
+      }
+    },
+    "cant_fetch": {
+      "user": "Nie można wczytać użytkownika.",
+      "guild": "Nie można wczytać gildii."
+    }
+  },
+  "your_blocklist": "Twoja lista blokowania",
+  "blocked": {
+    "users": "Zablokowani użytkownicy",
+    "guilds": "Zablokowane gildie"
+  },
+  "add": {
+    "guild": "Dodano gildię o nazwie {{guildName}} do listy blokowania.",
+    "user": "Dodano użytkownika o nazwie {{userName}} do listy blokowania."
+  },
+  "remove": {
+    "guild": "Usunięto gildię o nazwie {{guildName}} z listy blokowania.",
+    "user": "Usunięto {{userName}} z listy blokowania."
+  }
+}

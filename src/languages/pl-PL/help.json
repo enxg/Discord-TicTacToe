@@ -1,0 +1,19 @@
+{
+  "embed": {
+    "title": "Menu pomocy",
+    "usage": "Użyj {{helpCommand}} {{commandName}}, aby dowiedzieć się więcej o tym poleceniu.",
+    "example": "Na przykład: {{example}}.",
+    "v": {
+      "command": "polecenie",
+      "commands": "Polecenia",
+      "usage": "Użycie"
+    }
+  },
+  "commands": {
+    "ping": "Pomiar opóźnienia.",
+    "block": "Zablokuj/Odblokuj użytkownika lub sprawdź wcześniej zablokowanych użytkowników.",
+    "play": "Zagraj w Tic-Tac-Toe ze znajomym lub z SI.",
+    "language": "Ustaw język, który będzie używany w tej gildii lub sprawdź bieżący język.",
+    "help": "Pokazuje menu pomocy."
+  }
+}

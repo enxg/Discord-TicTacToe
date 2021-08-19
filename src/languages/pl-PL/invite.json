@@ -1,0 +1,10 @@
+{
+  "invite": {
+    "title": "Zaproś mnie!",
+    "desc": "Możesz mnie zaprosić naciskając tutaj!"
+  },
+  "support": {
+    "title": "Serwer wsparcia",
+    "desc": "Dołącz do serwera wsparcia."
+  }
+}
