@@ -1,0 +1,24 @@
+{
+  "uGame": {
+    "turn": "{{user}} wykonuje ruch. Masz na to 30 sekund.",
+    "win": "{{user}} wygrywa!",
+    "dmm": "{{user}} przekracza czas 30 sekund na ruch.",
+    "tie": "Remis!"
+  },
+  "error": {
+    "bot": "Nie możesz grać z innymi botami.",
+    "self": "Nie możesz grać ze sobą, żartownisiu."
+  },
+  "invite": {
+    "accept": "Akceptuj",
+    "decline": "Odrzuć",
+    "invited": "Zaproszono {{user}}. Mają jedną minutę na zaakceptowanie.",
+    "declined": "{{user}} odrzuca zaproszenie do gry."
+  },
+  "blocked": {
+    "u1": "Ten użytkownik Cię zablokował.",
+    "g1": "Ten użytkownik zablokował tę gildię.",
+    "u2": "Zablokowano tego użytkownika.",
+    "g2": "Zablokowano tę gildię."
+  }
+}
