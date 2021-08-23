@@ -1,0 +1,19 @@
+{
+  "embed": {
+    "title": "Hilfsmenü",
+    "usage": "Verwende {{helpCommand}} {{commandName}}, um mehr über diesen Befehl zu erfahren.",
+    "example": "Zum Beispiel: {{example}}.",
+    "v": {
+      "command": "Befehl",
+      "commands": "Befehle",
+      "usage": "Verwendung"
+    }
+  },
+  "commands": {
+    "ping": "Ping mich.",
+    "block": "Blockiere/entblockieren einen Benutzer oder sehe Benutzer, die du zuvor blockiert hast.",
+    "play": "Spiele Tic-Tac-Toe gegen deinen Freund oder die KI.",
+    "language": "Lege die Sprache fest, die für diese Gilde verwendet werden soll oder sehe die aktuelle Sprache.",
+    "help": "Zeigt das Hilfsmenü an."
+  }
+}
