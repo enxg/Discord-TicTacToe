@@ -43,7 +43,7 @@ Sentry.init({
 
 const client = new SapphireClient({
   shards: "auto",
-  intents: ["GUILD_INTEGRATIONS", "GUILD_MEMBERS", "GUILDS", "GUILD_MESSAGES"],
+  intents: ["GUILD_INTEGRATIONS", "GUILDS", "GUILD_MESSAGES"],
   presence: {
     activities: [
       {
